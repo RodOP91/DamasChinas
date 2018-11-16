@@ -1,23 +1,29 @@
 ﻿using UnityEngine;
-
+using System;
 public class Grid : MonoBehaviour {
-    public Transform hexPrefab;
+    public Transform BlueHexPrefab;
+    public Transform YellowHexPrefab;
+    public Transform GreenHexPrefab;
+    public Transform RedHexPrefab;
+    public Transform OrangeHexPrefab;
+    public Transform PurpleHexPrefab;
+    public Transform WhiteHexPrefab;
+    
 
-    public int gridHeight = 17;
-    public int gridWidth = 13;
+    public static int gridHeight = 4;
+    public static int gridWidth = 4;
 
     float hexWidth= 1.73205f;
     float hexHeight= 2.0f;
 
     public float gap = 0.0f;
 
-    Vector3 startPos;
+    Vector3 startPos= new Vector3(0, 0, 0);
 
     private void Start()
     {
         addGap();
-        calcStartPos();
-        createGrid();
+        GenerarTablero();
     }
 
     void addGap()
@@ -27,46 +33,65 @@ public class Grid : MonoBehaviour {
 
     }
 
-    void calcStartPos()
+    Vector3 calcWorldPos(int q, int r)
     {
-        float offset = 0;
-        if(gridHeight / 2 % 2 != 0)
-        {
-            offset = hexWidth / 2;
-
-        }
-
-        float x = -hexWidth * (gridWidth / 2) - offset;
-        float z = hexHeight * 0.75f * (gridHeight / 2);
-
-        startPos = new Vector3(x, 0, z);
-    }
-
-    Vector3 calcWorldPos(Vector2 gridPos)
-    {
-        float offset = 0;
-        if(gridPos.y %2 != 0)
-        {
-            offset = hexWidth / 2;
-        }
-
-        float x = startPos.x + gridPos.x * hexWidth + offset;
-        float z = startPos.z + gridPos.y * hexHeight * .75f;
-
+        float x = (hexHeight/2) * Mathf.Sqrt(3.0f) * (q + r / 2.0f);
+        float z = (hexHeight/2)* 3.0f / 2.0f * r;
         return new Vector3(x, 0, z);
     }
 
-    void createGrid()
+    void GenerarTablero()
     {
-        for (int y = 0; y < gridHeight; y++)
+        Debug.Log("Generando figura hexagonal central...");
+
+
+        int mapSize = Mathf.Max(gridWidth, gridHeight);
+        
+        for (int q = -mapSize-4; q <= mapSize+4; q++)
         {
-            for (int x = 0; x < gridWidth; x++)
+            int r1 = Mathf.Max(-mapSize, -q - mapSize);
+            int r2 = Mathf.Min(mapSize, -q + mapSize);
+            for (int r = r1; r <= r2; r++)
             {
-                Transform hex = Instantiate(hexPrefab) as Transform;
-                Vector2 gridPos = new Vector2(x, y);
-                hex.position = calcWorldPos(gridPos);
-                hex.parent = this.transform;
-                hex.name = "Hex_" + x + "|" + y; 
+                if(q < -4)
+                {
+                    Transform hexP6 = Instantiate(YellowHexPrefab) as Transform;
+                    hexP6.position = calcWorldPos(q, r);
+                    hexP6.parent = this.transform;
+                    hexP6.name = "Hex_" + q + "|" + r;
+                }
+                if(q > 4)
+                {
+                    Transform hexP3 = Instantiate(RedHexPrefab) as Transform;
+                    hexP3.position = calcWorldPos(q, r);
+                    hexP3.parent = this.transform;
+                    hexP3.name = "Hex_" + q + "|" + r; 
+                }
+                if(q>-5 && q<5)
+                {
+                    Transform hexdefault = Instantiate(WhiteHexPrefab) as Transform;
+                    hexdefault.position = calcWorldPos(q, r);
+                    hexdefault.parent = this.transform;
+                    hexdefault.name = "Hex_" + q + "|" + r;
+                }
+                if(q==-4 && r == 0)
+                {
+                    
+                    Debug.Log(mapSize);
+                    for (int a=q; a <= 0; a++)
+                    { 
+                        for (int b=r; b <= 0+a; b--) 
+                        {
+                            Transform hexP5 = Instantiate(PurpleHexPrefab) as Transform;
+                            hexP5.position = calcWorldPos(a, b);
+                            hexP5.parent = this.transform;
+                            hexP5.name = "Hex_" + a + "|" + b;
+                        }
+                    }
+                }
+
+                
+             
             }
         }
     }

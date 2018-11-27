@@ -74,24 +74,111 @@ public class Grid : MonoBehaviour {
                     hexdefault.parent = this.transform;
                     hexdefault.name = "Hex_" + q + "|" + r;
                 }
+                
                 if(q==-4 && r == 0)
                 {
-                    
                     Debug.Log(mapSize);
-                    for (int a=q; a <= 0; a++)
-                    { 
-                        for (int b=r; b <= 0+a; b--) 
+                    int aux= -1;
+                    
+                    for (int a=q; a < 0; a++)
+                    {
+                        int b = 0 + aux;
+                        while (b >= -4)
                         {
+                            int x = a;
+                            int y = b;
                             Transform hexP5 = Instantiate(PurpleHexPrefab) as Transform;
-                            hexP5.position = calcWorldPos(a, b);
+                            
+                            hexP5.position = calcWorldPos(x, y);
                             hexP5.parent = this.transform;
-                            hexP5.name = "Hex_" + a + "|" + b;
+                            hexP5.name = "Hex_" + x + "|" + y;
+                            b--;
+                            if(b == -4)
+                            {
+                                aux--;
+                            }
                         }
                     }
                 }
 
+                if (q == 4 && r == 0)
+                {
+                    Debug.Log(mapSize);
+                    int aux = 1;
+
+                    for (int a = q; a > 0; a--)
+                    {
+                        int b = 0 + aux;
+                        while (b <= 4)
+                        {
+                            int x = a;
+                            int y = b;
+                            Transform hexP5 = Instantiate(GreenHexPrefab) as Transform;
+
+                            hexP5.position = calcWorldPos(x, y);
+                            hexP5.parent = this.transform;
+                            hexP5.name = "Hex_" + x + "|" + y;
+                            b++;
+                            if (b == 4)
+                            {
+                                aux++;
+                            }
+                        }
+                    }
+                }
                 
-             
+                if (q == 4 && r == -4)
+                {
+                    Debug.Log(mapSize);
+                    int aux = -8;
+
+                    for (int a = q; a > 0; a--)
+                    {
+                        int b = -5;
+                        while (b >= aux)
+                        {
+                            int x = a;
+                            int y = b;
+                            Transform hexP5 = Instantiate(BlueHexPrefab) as Transform;
+
+                            hexP5.position = calcWorldPos(x, y);
+                            hexP5.parent = this.transform;
+                            hexP5.name = "Hex_" + x + "|" + y;
+                            b--;
+                            if (b < aux)
+                            {
+                                aux++;
+                            }
+                        }
+                    }
+                }
+
+                if (q == -4 && r == 4)
+                {
+                    Debug.Log(mapSize);
+                    int aux = 8;
+
+                    for (int a = q; a < 0; a++)
+                    {
+                        int b = 5;
+                        while (b <= aux)
+                        {
+                            int x = a;
+                            int y = b;
+                            Transform hexP5 = Instantiate(OrangeHexPrefab) as Transform;
+
+                            hexP5.position = calcWorldPos(x, y);
+                            hexP5.parent = this.transform;
+                            hexP5.name = "Hex_" + x + "|" + y;
+                            b++;
+                            if (b > aux)
+                            {
+                                aux--;
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }

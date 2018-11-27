@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class idioma : MonoBehaviour {
 
-    public static string idiomaSelec = "esp";
+    public static int idiomaSeleccionado = 1;
 
     private void Awake() {
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void setIdiomaSelec(int idioma) {
+        idiomaSeleccionado = idioma;
     }
 }

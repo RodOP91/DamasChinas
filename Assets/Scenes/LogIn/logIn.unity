@@ -122,7 +122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 87461059}
   - component: {fileID: 87461060}
+  - component: {fileID: 87461062}
   - component: {fileID: 87461061}
+  - component: {fileID: 87461063}
   m_Layer: 5
   m_Name: tbIngles
   m_TagString: Untagged
@@ -191,18 +193,7 @@ MonoBehaviour:
   m_Group: {fileID: 112426707}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 87461061}
-        m_MethodName: ingles
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -214,14 +205,68 @@ MonoBehaviour:
   m_GameObject: {fileID: 87461058}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa29d310c1dfa943aa447fbe4ed74dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &87461062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 87461058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 87461061}
+          m_MethodName: setIdiomaSelec
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 87461063}
+          m_MethodName: traducirIngles
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
+--- !u!114 &87461063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 87461058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37c03159751ca8e4c8cb6bbbaa248353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usuario: {fileID: 1453468101}
-  password: {fileID: 1557140250}
-  registro: {fileID: 160441726}
-  ingresar: {fileID: 1119771807}
-  invitado: {fileID: 1947977862}
+  txtUsuario: {fileID: 1307599421}
+  txtPassword: {fileID: 1121456652}
+  txtRegistrarse: {fileID: 160441726}
+  txtIngresar: {fileID: 694279135}
+  txtInvitado: {fileID: 570571955}
+  "txtEspa\xF1ol": {fileID: 1782931840}
+  txtIngles: {fileID: 1381480829}
 --- !u!1 &96821585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,7 +1193,9 @@ GameObject:
   m_Component:
   - component: {fileID: 729846090}
   - component: {fileID: 729846091}
+  - component: {fileID: 729846093}
   - component: {fileID: 729846092}
+  - component: {fileID: 729846094}
   m_Layer: 5
   m_Name: "tbEspa\xF1ol"
   m_TagString: Untagged
@@ -1217,18 +1264,7 @@ MonoBehaviour:
   m_Group: {fileID: 112426707}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 729846092}
-        m_MethodName: "espa\xF1ol"
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
@@ -1240,14 +1276,68 @@ MonoBehaviour:
   m_GameObject: {fileID: 729846089}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa29d310c1dfa943aa447fbe4ed74dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &729846093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 729846089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 729846092}
+          m_MethodName: setIdiomaSelec
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 729846094}
+          m_MethodName: "traducirEspa\xF1ol"
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
+--- !u!114 &729846094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 729846089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37c03159751ca8e4c8cb6bbbaa248353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usuario: {fileID: 1453468101}
-  password: {fileID: 1557140250}
-  registro: {fileID: 160441726}
-  ingresar: {fileID: 1119771807}
-  invitado: {fileID: 1947977862}
+  txtUsuario: {fileID: 1307599421}
+  txtPassword: {fileID: 1121456652}
+  txtRegistrarse: {fileID: 160441726}
+  txtIngresar: {fileID: 694279135}
+  txtInvitado: {fileID: 570571955}
+  "txtEspa\xF1ol": {fileID: 1782931840}
+  txtIngles: {fileID: 1381480829}
 --- !u!1 &785259052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1348,7 @@ GameObject:
   - component: {fileID: 785259055}
   - component: {fileID: 785259054}
   - component: {fileID: 785259053}
+  - component: {fileID: 785259056}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1325,6 +1416,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &785259056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 785259052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c03159751ca8e4c8cb6bbbaa248353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtUsuario: {fileID: 1307599421}
+  txtPassword: {fileID: 1121456652}
+  txtRegistrarse: {fileID: 160441726}
+  txtIngresar: {fileID: 694279135}
+  txtInvitado: {fileID: 570571955}
+  "txtEspa\xF1ol": {fileID: 1782931840}
+  txtIngles: {fileID: 1381480829}
 --- !u!1 &886141405
 GameObject:
   m_ObjectHideFlags: 0

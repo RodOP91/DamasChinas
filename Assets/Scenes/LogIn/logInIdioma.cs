@@ -1,23 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using Assets.Resources;
 using UnityEngine;
 
 public class logInIdioma : MonoBehaviour {
 
-    public InputField usuario;
-    public InputField password;
-    public Text registro;
-    public Button ingresar;
-    public Button invitado;
+    public Text txtUsuario;
+    public Text txtPassword;
+    public Text txtRegistrarse;
+    public Text txtIngresar;
+    public Text txtInvitado;
+    public Text txtEspañol;
+    public Text txtIngles;
+    private static string[] idiomaEspañol = { "USUARIO...", "CONTRASEÑA...", "Registrarse", "Ingresar", "Invitado", "Español", "Ingles" };
+    private static string[] idiomaIngles = { "USER...", "PASSWORD...", "Register", "Log In", "Invitate", "Spanish", "English" };
 
-    public void español() {
-        registro.text = default_Es_Mx.logIntxtRegistro;
+    // Use this for initialization
+    void Start () {
+        traducirEspañol();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+    public void traducirEspañol() {
+        if(idioma.idiomaSeleccionado == 1) {
+            txtUsuario.text = idiomaEspañol[0];
+            txtPassword.text = idiomaEspañol[1];
+            txtRegistrarse.text = idiomaEspañol[2];
+            txtIngresar.text = idiomaEspañol[3];
+            txtInvitado.text = idiomaEspañol[4];
+            txtEspañol.text = idiomaEspañol[5];
+            txtIngles.text = idiomaEspañol[6];
+        }
     }
 
-    public void ingles()
-    {
-        registro.text = Resource_En_Us.logIntxtRegistro;
+    public void traducirIngles() {
+        if (idioma.idiomaSeleccionado == 2) {
+            txtUsuario.text = idiomaIngles[0];
+            txtPassword.text = idiomaIngles[1];
+            txtRegistrarse.text = idiomaIngles[2];
+            txtIngresar.text = idiomaIngles[3];
+            txtInvitado.text = idiomaIngles[4];
+            txtEspañol.text = idiomaIngles[5];
+            txtIngles.text = idiomaIngles[6];
+        }
     }
 }

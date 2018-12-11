@@ -21,9 +21,11 @@ GameObject:
   - component: {fileID: 4646381249150354}
   - component: {fileID: 33868661005935086}
   - component: {fileID: 23143108651429774}
-  m_Layer: 0
+  - component: {fileID: 114748531649468370}
+  - component: {fileID: 64949425913330952}
+  m_Layer: 9
   m_Name: OrangeHexPrefab
-  m_TagString: Untagged
+  m_TagString: casilla
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,3 +85,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1707587037108878}
   m_Mesh: {fileID: 4300000, guid: 65216d74c2217c24daa6c5d632181897, type: 3}
+--- !u!64 &64949425913330952
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1707587037108878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 65216d74c2217c24daa6c5d632181897, type: 3}
+--- !u!114 &114748531649468370
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1707587037108878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810338363ef9498449175d61499de08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

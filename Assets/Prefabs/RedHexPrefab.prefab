@@ -8,22 +8,24 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1364179096193478}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1364179096193478
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4705095131588424}
   - component: {fileID: 33144825531714780}
   - component: {fileID: 23662672388928942}
-  m_Layer: 0
+  - component: {fileID: 114174017808909034}
+  - component: {fileID: 64056470170238062}
+  m_Layer: 9
   m_Name: RedHexPrefab
-  m_TagString: Untagged
+  m_TagString: casilla
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +33,7 @@ GameObject:
 --- !u!4 &4705095131588424
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364179096193478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -44,7 +46,7 @@ Transform:
 --- !u!23 &23662672388928942
 MeshRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364179096193478}
   m_Enabled: 1
@@ -79,7 +81,32 @@ MeshRenderer:
 --- !u!33 &33144825531714780
 MeshFilter:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364179096193478}
   m_Mesh: {fileID: 4300000, guid: 65216d74c2217c24daa6c5d632181897, type: 3}
+--- !u!64 &64056470170238062
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364179096193478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 65216d74c2217c24daa6c5d632181897, type: 3}
+--- !u!114 &114174017808909034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364179096193478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810338363ef9498449175d61499de08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

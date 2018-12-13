@@ -6,6 +6,7 @@ public class Casilla : MonoBehaviour {
     //Coordenadas de la casilla
     private  int casillaX;
     private int casillaY;
+    private int[] xy;
     //Tipo de casilla: neutral o de un jugador.
     private int tipo_casilla;
     //Indicador de que es casilla.
@@ -21,15 +22,23 @@ public class Casilla : MonoBehaviour {
         this.tiene_pza = tiene_pza;
     }
     //Setters
-    public void setCasillaX(int casillaX)
+    private void setCasillaX(int casillaX)
     {
         this.casillaX = casillaX;
 
     }
-    public void setCasillaY(int casillaY)
+    private void setCasillaY(int casillaY)
     {
         this.casillaY = casillaY;
 
+    }
+
+    public void setXY(int x, int y)
+    {
+        this.xy = new int[] { x, y };
+
+        setCasillaX(x);
+        setCasillaY(y);
     }
     public void setTipoCasilla(int tipo_casilla)
     {
@@ -48,6 +57,10 @@ public class Casilla : MonoBehaviour {
     public int getCoordY()
     {
         return this.casillaY;
+    }
+    public int[] getXY()
+    {
+        return this.xy;
     }
     public int getTipoCasilla()
     {

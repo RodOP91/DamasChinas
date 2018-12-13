@@ -30,16 +30,18 @@ public class Tablero : MonoBehaviour {
 
     private List<Pieza> jugador1, jugador2, jugador3, jugador4, jugador5, jugador6;
     private List<Pieza> piezas_desordenadas = new List<Pieza>();
+    public static List<Casilla> tablero = new List<Casilla>();
 
     private Vector3 mouseOver= new Vector3(0,0,0);
     private Vector3 inicioArrastre = new Vector3(0,0,0);
     private Vector3 finArrastre= new Vector3(0,0,0);
 
     RaycastHit hitInfo = new RaycastHit();
-    Pieza pieza_seleccionada;
+    GameObject pieza_seleccionada;
+    GameObject casilla_seleccionada;
     int pza_sel_x;
     int pza_sel_y;
-    Casilla casilla_seleccionada;
+    
 
     public static int gridHeight = 4;
     public static int gridWidth = 4;
@@ -62,93 +64,63 @@ public class Tablero : MonoBehaviour {
 
     private void Update()
     {
-        UpdateMouseOver();
+        /*UpdateMouseOver();
 
         //Debug.Log(mouseOver);
         int x = (int)mouseOver.x;
-        int y = (int)mouseOver.z;
+        int y = (int)mouseOver.z;*/
         if (Input.GetMouseButtonDown(0))
         { 
             SeleccionarObjeto();  
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if(pieza_seleccionada!=null && casilla_seleccionada != null)
+        {
+            MoverPieza();
+        }
+        /*if (Input.GetMouseButtonUp(0))
         {
             MoverPieza((int)inicioArrastre.x, (int)inicioArrastre.y, x, y);
-        }
+        }*/
 
         
     }
-
-    private void UpdateMouseOver()
-    {
-        //Si es mi turno
-        if (!Camera.main)
-        {
-            Debug.Log("No hay ninguna cámara");
-            return;
-        }
-
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit)){
-            mouseOver.x = (int)hit.point.x;
-            mouseOver.z = (int)hit.point.z;
-            mouseOver.y = 0;
-
-        }
-        else
-        {
-            mouseOver.x = -1;
-            mouseOver.y = -1;
-        }
-
-    }
-    
 
     private void SeleccionarObjeto()
     {
-            Debug.Log("Mouse is down");
-            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, LayerMask.GetMask("Tablero"));
-            if (hit)
-            {
-                Debug.Log("Hit " + hitInfo.transform.gameObject.name);
-                if (hitInfo.transform.gameObject.tag.Equals("casilla"))
-                {
-                    Debug.Log("Seleccionó una casilla");
-                    Debug.Log(hitInfo.transform.gameObject.GetComponent<Casilla>().getCoordX() + "," 
-                        + hitInfo.transform.gameObject.GetComponent<Casilla>().getCoordY() + " " 
-                        + hitInfo.transform.gameObject.GetComponent<Casilla>().tienePza());
-                casilla_seleccionada = hitInfo.transform.gameObject.GetComponent<Casilla>();
-                Debug.Log(casilla_seleccionada.transform.position);
-                        
-                }
-                else
-                {
-                    Debug.Log(hitInfo.transform.gameObject.tag);
-                    Debug.Log("Seleccionó una pieza " + hitInfo.transform.gameObject.GetComponent<Pieza>().getCoordX() 
-                        + "," + hitInfo.transform.gameObject.GetComponent<Pieza>().getCoordY());
-                pieza_seleccionada = hitInfo.transform.gameObject.GetComponent<Pieza>();
-                pza_sel_x = hitInfo.transform.gameObject.GetComponent<Pieza>().getCoordX();
-                pza_sel_y = hitInfo.transform.gameObject.GetComponent<Pieza>().getCoordY();
-
-                Debug.Log(piezas_desordenadas.Find(x => x.getCoordX().Equals(pza_sel_x)
-                && piezas_desordenadas.Find(y=> y.getCoordY().Equals(pza_sel_y))));
-                }
-            inicioArrastre = mouseOver; 
-            }
-            
+        GameObject temp = GameObject.Find(ApuntarAObjeto.objetoSeleccionado);
+        if (temp.tag.Equals("casilla"))
+        {
+            casilla_seleccionada = temp;
+        }
+        if (temp.tag.Equals("player"))
+        {
+            pieza_seleccionada = temp;
+        }
     }
+            
     
-    private void MoverPieza(int x1, int y1, int x2, int y2)
+    
+    private void MoverPieza()
     {
-        
-        //Soporte a Multijugador
-        inicioArrastre = new Vector3(x1, 0, y1);
-        finArrastre = new Vector3(x2, 0, y2);
-        pieza_seleccionada = (piezas_desordenadas.Find(x => x.getCoordX().Equals(pza_sel_x) && piezas_desordenadas.Find(y => y.getCoordY().Equals(pza_sel_y))));
-        bool hit = (Physics.Raycast(Camera.main.ScreenPointToRay(finArrastre), out hitInfo));
-        pieza_seleccionada.transform.gameObject.transform.SetPositionAndRotation(hitInfo.transform.position, );
+        if (pieza_seleccionada.gameObject.GetComponent<Pieza>()
+            .movimientoValido(pieza_seleccionada, casilla_seleccionada))
+        {
+            pieza_seleccionada.GetComponentInParent<Casilla>().ponlePieza(false);
+            pieza_seleccionada.transform.position = calcPiecePos(casilla_seleccionada.transform.gameObject.GetComponent<Casilla>().getCoordX(),
+                casilla_seleccionada.transform.gameObject.GetComponent<Casilla>().getCoordY());
+            pieza_seleccionada.transform.gameObject.GetComponent<Pieza>().actualizarDatos(casilla_seleccionada);
 
+            casilla_seleccionada.transform.gameObject.GetComponent<Casilla>().ponlePieza(true);
+            
+
+            pieza_seleccionada = null;
+            casilla_seleccionada = null;
+        }
+        else
+        {
+            Debug.Log("Movimiento invalido");
+        }
         
     }
     
@@ -171,14 +143,14 @@ public class Tablero : MonoBehaviour {
     {
         float x = (hexHeight/2) * Mathf.Sqrt(3.0f) * (q + r / 2.0f);
         float z = (hexHeight/2)* 3.0f / 2.0f * r;
-        return new Vector3(x, 0.25f, z);
+        return new Vector3(x, 0.4f, z);
     }
 
 
     /*Sección relativa a la generación física del tablero y sus piezas. 
      * Se asignan y ordenan las coordenadas de las piezas*/
 
-    //Método para generar las estrella con sus 6 picos. Cada uno de los picos corresponderá a un jugador.
+    /*Método para generar las estrella con sus 6 picos. Cada uno de los picos corresponderá a un jugador.*/
     void GenerarTablero()
     {
         Debug.Log("Generando figura hexagonal central...");
@@ -199,19 +171,18 @@ public class Tablero : MonoBehaviour {
                     hexP2.transform.SetParent(this.transform);
                     hexP2.name = "Hex_" + q + "|" + r;
                     Casilla c = hexP2.GetComponent<Casilla>();
-                    c.setCasillaX(q);
-                    c.setCasillaY(r);
+                    c.setXY(q, r);            
                     c.setTipoCasilla(2);
                     c.ponlePieza(true);
+                    tablero.Add(hexP2.GetComponent<Casilla>());
                     
 
                     GameObject pzP2 = Instantiate(YellowPiecePrefab) as GameObject;
                     pzP2.transform.SetParent(hexP2.transform);
                     pzP2.transform.position= calcPiecePos(q, r);
-                    pzP2.name = "Jugador2"; 
+                    pzP2.name = "Pieza " + q + "|" + r;
                     Pieza p = pzP2.GetComponent<Pieza>();
-                    p.setCoordX(q);
-                    p.setCoordY(r);
+                    p.setXY(q, r);
                     p.setPlayer(2);
                     piezas_desordenadas.Add(p);
 
@@ -223,18 +194,17 @@ public class Tablero : MonoBehaviour {
                     hexP3.transform.SetParent(this.transform);
                     hexP3.name = "Hex_" + q + "|" + r;
                     Casilla c = hexP3.GetComponent<Casilla>();
-                    c.setCasillaX(q);
-                    c.setCasillaY(r);
+                    c.setXY(q, r);
                     c.setTipoCasilla(3);
                     c.ponlePieza(true);
+                    tablero.Add(hexP3.GetComponent<Casilla>());
 
                     GameObject pzP3 = Instantiate(RedPiecePrefab) as GameObject;
                     pzP3.transform.SetParent(hexP3.transform);
                     pzP3.transform.position = calcPiecePos(q, r);
-                    pzP3.name = "Jugador3"; 
+                    pzP3.name = "Pieza " + q + "|" + r;
                     Pieza p = pzP3.GetComponent<Pieza>();
-                    p.setCoordX(q);
-                    p.setCoordY(r);
+                    p.setXY(q, r);
                     p.setPlayer(3);
                     piezas_desordenadas.Add(p);
                 }
@@ -245,9 +215,9 @@ public class Tablero : MonoBehaviour {
                     hexdefault.transform.SetParent(this.transform);
                     hexdefault.name = "Hex_" + q + "|" + r;
                     Casilla c = hexdefault.GetComponent<Casilla>();
-                    c.setCasillaX(q);
-                    c.setCasillaY(r);
+                    c.setXY(q, r);
                     c.setTipoCasilla(0);
+                    tablero.Add(hexdefault.GetComponent<Casilla>());
                 }
                 
                 if(q==-4 && r == 0)
@@ -268,20 +238,19 @@ public class Tablero : MonoBehaviour {
                             hexP6.transform.SetParent(this.transform);
                             hexP6.name = "Hex_" + x + "|" + y;
                             Casilla c = hexP6.GetComponent<Casilla>();
-                            c.setCasillaX(x);
-                            c.setCasillaY(y);
+                            c.setXY(x, y);
                             c.setTipoCasilla(6);
                             c.ponlePieza(true);
+                            tablero.Add(hexP6.GetComponent<Casilla>());
 
                             b--;
 
                             GameObject pzP6 = Instantiate(PurplePiecePrefab) as GameObject;
                             pzP6.transform.SetParent(hexP6.transform);
                             pzP6.transform.position = calcPiecePos(x, y);
-                            pzP6.name = "Jugador6";
+                            pzP6.name = "Pieza " + x + "|" + y;
                             Pieza p = pzP6.GetComponent<Pieza>();
-                            p.setCoordX(x);
-                            p.setCoordY(y);
+                            p.setXY(x, y);
                             p.setPlayer(6);
                             piezas_desordenadas.Add(p);
 
@@ -311,18 +280,17 @@ public class Tablero : MonoBehaviour {
                             hexP4.transform.SetParent(this.transform);
                             hexP4.name = "Hex_" + x + "|" + y;
                             Casilla c = hexP4.GetComponent<Casilla>();
-                            c.setCasillaX(x);
-                            c.setCasillaY(y);
+                            c.setXY(x, y);
                             c.setTipoCasilla(4);
                             c.ponlePieza(true);
+                            tablero.Add(hexP4.GetComponent<Casilla>());
 
                             GameObject pzP4 = Instantiate(GreenPiecePrefab) as GameObject;
                             pzP4.transform.SetParent(hexP4.transform);
                             pzP4.transform.position = calcPiecePos(x, y);
-                            pzP4.name = "Jugador4";
+                            pzP4.name = "Pieza " + x + "|" + y;
                             Pieza p = pzP4.GetComponent<Pieza>();
-                            p.setCoordX(x);
-                            p.setCoordY(y);
+                            p.setXY(x, y);
                             p.setPlayer(4);
                             piezas_desordenadas.Add(p);
 
@@ -354,18 +322,17 @@ public class Tablero : MonoBehaviour {
                             hexP1.transform.SetParent(this.transform);
                             hexP1.name = "Hex_" + x + "|" + y;
                             Casilla c = hexP1.GetComponent<Casilla>();
-                            c.setCasillaX(x);
-                            c.setCasillaY(y);
+                            c.setXY(x, y);
                             c.setTipoCasilla(1);
                             c.ponlePieza(true);
+                            tablero.Add(hexP1.GetComponent<Casilla>());
 
                             GameObject pzP1 = Instantiate(BluePiecePrefab) as GameObject;
                             pzP1.transform.SetParent(hexP1.transform);
                             pzP1.transform.position = calcPiecePos(x, y);
-                            pzP1.name = "Jugador1";
+                            pzP1.name = "Pieza " + x + "|" + y;
                             Pieza p = pzP1.GetComponent<Pieza>();
-                            p.setCoordX(x);
-                            p.setCoordY(y);
+                            p.setXY(x, y);
                             p.setPlayer(1);
                             piezas_desordenadas.Add(p);
                             b--;
@@ -395,18 +362,17 @@ public class Tablero : MonoBehaviour {
                             hexP5.transform.SetParent(this.transform);
                             hexP5.name = "Hex_" + x + "|" + y;
                             Casilla c = hexP5.GetComponent<Casilla>();
-                            c.setCasillaX(x);
-                            c.setCasillaY(y);
+                            c.setXY(x, y);
                             c.setTipoCasilla(5);
                             c.ponlePieza(true);
+                            tablero.Add(hexP5.GetComponent<Casilla>());
 
                             GameObject pzP5 = Instantiate(OrangePiecePrefab) as GameObject;
                             pzP5.transform.SetParent(hexP5.transform);
                             pzP5.transform.position = calcPiecePos(x, y);
-                            pzP5.name = "Jugador5";
+                            pzP5.name = "Pieza " + x + "|" + y;
                             Pieza p = pzP5.GetComponent<Pieza>();
-                            p.setCoordX(x);
-                            p.setCoordY(y);
+                            p.setXY(x, y);
                             p.setPlayer(5);
                             piezas_desordenadas.Add(p);
 
@@ -422,9 +388,7 @@ public class Tablero : MonoBehaviour {
             }
         }
     }
-/*Método que ordena las piezas creadas en una matriz de 6x10.
- Las filas representan el no. de jugador.
- Las columnas representan el no. de piezas.*/
+/*Método que inserta a las piezas de cada jugador en listas por separado.*/
     public void OrdenarPiezas()
     {
         jugador1 = piezas_desordenadas.FindAll(p => p.getPlayer().Equals(1));

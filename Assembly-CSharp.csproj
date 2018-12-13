@@ -62,23 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Grid.cs" />
-    <Compile Include="Assets\Scenes\Clases\Registro.cs" />
-    <Compile Include="Assets\Scenes\Clases\Usuario.cs" />
-    <Compile Include="Assets\Scenes\LogIn\logIn.cs" />
-    <Compile Include="Assets\Scenes\LogIn\logInIdioma.cs" />
-    <Compile Include="Assets\Scenes\Menu\menu.cs" />
-    <Compile Include="Assets\Scenes\Menu\menuIdioma.cs" />
-    <Compile Include="Assets\Scenes\Perfil\perfil.cs" />
-    <Compile Include="Assets\Scenes\Registro\registrar.cs" />
     <Compile Include="Assets\Scenes\Scripts\ApuntarAObjeto.cs" />
     <Compile Include="Assets\Scenes\Scripts\Casilla.cs" />
     <Compile Include="Assets\Scenes\Scripts\DamasCliente.cs" />
     <Compile Include="Assets\Scenes\Scripts\flashSeleccionado.cs" />
-    <Compile Include="Assets\Scenes\Scripts\idioma.cs" />
     <Compile Include="Assets\Scenes\Scripts\Pieza.cs" />
-    <Compile Include="Assets\Scenes\Scripts\salir.cs" />
     <Compile Include="Assets\Scenes\Scripts\Tablero.cs" />
-    <Compile Include="Assets\Scenes\Scripts\UsuarioP.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/ferzo/Documents/DamasChinas/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

@@ -166,3 +166,5 @@ C:\Users\ferzo\Documents\DamasChinas\Temp\bin\Debug\UnityEngine.SpatialTracking.
 C:\Users\ferzo\Documents\DamasChinas\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\ferzo\Documents\DamasChinas\obj\Debug\Assembly-CSharp.dll
 C:\Users\ferzo\Documents\DamasChinas\obj\Debug\Assembly-CSharp.pdb
+C:\Users\edson\Documents\Unity\DamasChinas\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\edson\Documents\Unity\DamasChinas\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
